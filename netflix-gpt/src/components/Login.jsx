@@ -1,6 +1,11 @@
+import { useState } from "react";
 import Header from "./Header";
 
 const Login = () => {
+  const [isSignInForm, setIsSignInForm] = useState(true);
+  const toggleSignInForm = () => {
+    setIsSignInForm(!isSignInForm);
+  };
   return (
     <div>
       <Header />
@@ -11,7 +16,17 @@ const Login = () => {
         />
       </div>
       <form className="absolute w-full max-w-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-70 p-8 rounded-md shadow-lg">
-        <h1 className="text-white text-3xl font-bold mb-6">Sign In</h1>
+        <h1 className="text-white text-3xl font-bold mb-6">
+          {isSignInForm ? "Sign In" : "Sign Up"}
+        </h1>
+        {!isSignInForm && (
+          <input
+            className="p-3 mb-4 w-full bg-gray-800 text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-600"
+            type="text"
+            placeholder="Name"
+          />
+        )}
+
         <input
           className="p-3 mb-4 w-full bg-gray-800 text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-600"
           type="text"
@@ -23,14 +38,17 @@ const Login = () => {
           placeholder="Password"
         />
         <button className="p-3 bg-red-600 hover:bg-red-700 text-white rounded font-bold w-full mb-4">
-          Sign In
+          {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <div className="flex justify-between text-gray-400 text-sm">
-          <label>
-            <span className="mr-2 font-bold text-lg">
-              New to Netflix? Sign Up Now
-            </span>
-          </label>
+          <span
+            onClick={toggleSignInForm}
+            className="mr-2 font-bold text-lg cursor-pointer"
+          >
+            {isSignInForm
+              ? "New to Netflix? Sign Up Now"
+              : "Already have an account? Sign In"}
+          </span>
         </div>
       </form>
     </div>
