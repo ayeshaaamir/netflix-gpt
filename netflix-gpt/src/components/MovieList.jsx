@@ -5,17 +5,15 @@ const MovieList = ({ title = "Movies", movies = [] }) => {
   if (!movies || movies.length === 0) return null;
 
   return (
-    <div className="px-6">
-      <h2 className="text-white text-2xl py-4 ml-6">
+    <div className="px-4 md:px-6">
+      <h2 className="text-white text-xl md:text-2xl font-semibold mb-2 md:mb-4">
         {title}
       </h2>
 
-      <div className="overflow-x-auto scrollbar-hide">
-        <div className="flex space-x-4 pl-6 pr-2">
+      <div className="overflow-x-scroll scrollbar-hide">
+        <div className="flex space-x-3 md:space-x-5">
           {movies.map((movie) => (
-            <div className="shrink-0 w-36 md:w-48" key={movie.id}>
-              <MovieCard posterPath={movie.poster_path} />
-            </div>
+            <MovieCard key={movie.id} posterPath={movie.poster_path} />
           ))}
         </div>
       </div>

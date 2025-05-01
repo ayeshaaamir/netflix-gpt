@@ -85,12 +85,14 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div>
+      <div className="min-h-screen relative">
         <img
           src={NETFLIX_BG_IMG}
           alt="logo"
+          className="absolute top-0 left-0 w-full h-full object-cover"
         />
       </div>
+
       <form
         onSubmit={(e) => e.preventDefault()}
         className="absolute w-full max-w-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-70 p-8 rounded-md shadow-lg"
