@@ -1,29 +1,10 @@
-import { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
-import { addTrailerVideo } from "../utils/slices/moviesSlice";
+import { useSelector } from "react-redux";
+import { useMovieTrailer } from "../hooks/useMovieTrailer";
 
 const VideoBackground = ({ movieId }) => {
+  useMovieTrailer(movieId);
   const trailerVideo = useSelector((store) => store.movies.trailerVideo);
-  const dispatch = useDispatch();
-
-  const getMovieVideo = async () => {
-    const url = `https://api.themoviedb.org/3/movie/${movieId}/videos`;
-    const data = await fetch(url, API_OPTIONS);
-    const res = await data.json();
-    const filtered = res.results.filter(
-      (video) => video.type === "Trailer" && video.site === "YouTube"
-    );
-    const trailer = filtered.length ? filtered[0] : res.results[0];
-    dispatch(addTrailerVideo(trailer));
-  };
-
-  useEffect(() => {
-    getMovieVideo();
-  }, [movieId]);
-
-  if (!trailerVideo?.key) return null;
 
   return (
     <div className="absolute top-0 left-0 w-full -z-10 h-[100vh] overflow-hidden">
